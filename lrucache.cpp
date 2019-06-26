@@ -24,7 +24,7 @@ public:
 	node *next;
 };
 
-/*Ë«ÏòÁ´±í*/
+/*åŒå‘é“¾è¡¨*/
 class doublelist 
 {
 public:
@@ -120,11 +120,11 @@ public:
 	{
 		map<int, node *>::iterator it;
 		it = lrumap.find(key);
-		/*²»´æÔÚÔò·µ»Ø-1 */
+		/*ä¸å­˜åœ¨åˆ™è¿”å›-1 */
 		if(it == lrumap.end()) {
 			return -1;
 		}
-		/*Èç¹û´æÔÚÔò½«¸Ã½ÚµãÒÆ¶¯µ½Á´±íÎ²£¬²¢·µ»Øvalue */
+		/*å¦‚æœå­˜åœ¨åˆ™å°†è¯¥èŠ‚ç‚¹ç§»åŠ¨åˆ°é“¾è¡¨å°¾ï¼Œå¹¶è¿”å›value */
 		node *pnode = it->second;
 		lrulist.move_to_tail(pnode);
 		return pnode->value;
@@ -134,7 +134,7 @@ public:
 	{
 		map<int, node*>::iterator it;
 		it = lrumap.find(key);
-		/*´æÔÚÔò¸üĞÂ½Úµã£¬²¢½«½ÚµãÒÆ¶¯µ½Á´±íÎ²*/
+		/*å­˜åœ¨åˆ™æ›´æ–°èŠ‚ç‚¹ï¼Œå¹¶å°†èŠ‚ç‚¹ç§»åŠ¨åˆ°é“¾è¡¨å°¾*/
 		if(it != lrumap.end()) {
 			node *pnode = it->second;
 			pnode->value = value;
@@ -142,12 +142,12 @@ public:
 			return;
 		}
 
-		/*Èç¹û²»´æÔÚÇÒÃ»ÓĞ³¬ÏŞ£¬²åÈë½Úµã²¢½«½ÚµãÒÆ¶¯µ½Á´±íÎ²*/
+		/*å¦‚æœä¸å­˜åœ¨ä¸”æ²¡æœ‰è¶…é™ï¼Œæ’å…¥èŠ‚ç‚¹å¹¶å°†èŠ‚ç‚¹ç§»åŠ¨åˆ°é“¾è¡¨å°¾*/
 		if(lrumap.size() < maxsize) {
 			node *pnode = new node(key, value);
 			lrumap.insert(make_pair(key, pnode));
 			lrulist.inert_at_tail(pnode);
-		} else { /*·ñÔòÉ¾³ıÁ´±íÍ·ÔªËØ£¬²åÈëĞÂ½Úµã£¬²¢½«½ÚµãÒÆ¶¯µ½Á´±íÎ²*/
+		} else { /*å¦åˆ™åˆ é™¤é“¾è¡¨å¤´å…ƒç´ ï¼Œæ’å…¥æ–°èŠ‚ç‚¹ï¼Œå¹¶å°†èŠ‚ç‚¹ç§»åŠ¨åˆ°é“¾è¡¨å°¾*/
 			lrumap.erase(lrulist.get_head());
 			lrulist.remove_head();
 			node *pnode = new node(key, value);
@@ -193,7 +193,7 @@ int main(void)
 	printf("cache get %d value %d\n", 3, value);
 	value = cache->get(6);
 	printf("cache get %d value %d\n", 6, value);
-	cache->dump();
+	cache->dump(); 
 	
 	return 0;
 	
