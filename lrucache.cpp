@@ -35,12 +35,12 @@ public:
 	~doublelist()
 	{
 	}
-
+	
+	/*移动节点到链表尾*/
 	void move_to_tail(node *pnode)
 	{
-		if(head == pnode) {
+		if(head == pnode)
 			head = pnode->next;
-		}
 
 		if(tail == pnode)
 			return;
@@ -52,10 +52,11 @@ public:
 
 		inert_at_tail(pnode);
 	}
-
+	
+	/*在链表尾插入节点*/
 	void inert_at_tail(node *pnode)
 	{
-		if(!tail){
+		if(!tail) {
 			head = pnode;
 			tail = pnode;
 			pnode->next = NULL;
@@ -69,14 +70,15 @@ public:
 		
 		tail = pnode;
 	}	
-
+	
+	/*返回链表头节点key值*/
 	int get_head(void)
 	{
 		assert(head != NULL);
-
 		return head->key;
 	}
-
+	
+	/*删除链表头节点*/
 	void remove_head(void)
 	{
 		if(head != NULL) {
@@ -97,8 +99,6 @@ public:
 		printf("\n");
 	}
 
-	
-
 private:
 	node *head, *tail;
 };
@@ -112,8 +112,7 @@ public:
 	}
 
 	~lrucache()
-	{
-		
+	{		
 	}
 
 	int get(int key)
@@ -147,7 +146,8 @@ public:
 			node *pnode = new node(key, value);
 			lrumap.insert(make_pair(key, pnode));
 			lrulist.inert_at_tail(pnode);
-		} else { /*否则删除链表头元素，插入新节点，并将节点移动到链表尾*/
+		} else { 
+		/*否则删除链表头元素，插入新节点，并将节点移动到链表尾*/
 			lrumap.erase(lrulist.get_head());
 			lrulist.remove_head();
 			node *pnode = new node(key, value);
